@@ -1,0 +1,7 @@
+{
+  "name": "Examen Registro de Incidentes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
