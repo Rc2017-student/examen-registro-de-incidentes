@@ -1,20 +1,59 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Formulario de inicio de sesión -->
+  <div *ngIf="!isRegisterMode">
+    <ion-item>
+      <ion-label position="stacked">Nombre de Usuario</ion-label>
+      <ion-input [(ngModel)]="username" type="text" placeholder="Ingresa tu nombre de usuario"></ion-input>
+    </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" type="password" placeholder="Ingresa tu contraseña"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Recordar Usuario</ion-label>
+      <ion-checkbox [(ngModel)]="rememberMe" slot="start"></ion-checkbox>
+    </ion-item>
+
+    <ion-button expand="full" (click)="login()">Iniciar Sesión</ion-button>
+    <ion-button expand="full" color="light" (click)="toggleRegisterMode()">Registrarse</ion-button>
+  </div>
+
+  <!-- Formulario de registro -->
+  <div *ngIf="isRegisterMode">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="firstName" type="text" placeholder="Ingresa tu nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Apellidos</ion-label>
+      <ion-input [(ngModel)]="lastName" type="text" placeholder="Ingresa tus apellidos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nombre de Usuario</ion-label>
+      <ion-input [(ngModel)]="username" type="text" placeholder="Ingresa tu nombre de usuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" type="password" placeholder="Ingresa tu contraseña"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Repetir Contraseña</ion-label>
+      <ion-input [(ngModel)]="confirmPassword" type="password" placeholder="Repite tu contraseña"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+    <ion-button expand="full" color="light" (click)="toggleRegisterMode()">Volver a Iniciar Sesión</ion-button>
   </div>
 </ion-content>
