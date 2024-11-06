@@ -4,12 +4,15 @@
   </ion-toolbar>
 
   <!-- Contenedor de las pestañas -->
-  <ion-segment value="addincidentes">
+  <ion-segment>
     <ion-segment-button (click)="navigateTo('addincidentes')" value="addincidentes">
       Añadir Incidente
     </ion-segment-button>
     <ion-segment-button (click)="navigateTo('verincidentes')" value="verincidentes">
       Ver Incidentes
+    </ion-segment-button>
+    <ion-segment-button (click)="navigateTo('notificaciones')" value="notificaciones">
+      Notificaciones
     </ion-segment-button>
   </ion-segment>
 </ion-header>

@@ -1,13 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Ver Incidentes</ion-title>
+    <ion-title>Incidentes Resueltos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Ver Incidentes</ion-title>
+      <ion-title size="large">Incidentes Resueltos</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="navigateTo('notificaciones')">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-badge color="danger">{{ notificacionesPage.contadorNotificaciones }}</ion-badge>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -18,8 +24,8 @@
     <ion-segment-button (click)="navigateTo('menuprincipal')" value="menuprincipal">
       Menú Principal
     </ion-segment-button>
-    <ion-segment-button (click)="navigateTo('incidentescompletados')" value="incidentesompletados">
-      Incidentes completados
+    <ion-segment-button (click)="navigateTo('verincidentes')" value="verincidentes">
+      Incidentes Resueltos
     </ion-segment-button>
   </ion-segment>
 
@@ -34,7 +40,8 @@
   <ion-item>
     <ion-label position="stacked">Filtrar por Ubicación:</ion-label>
     <ion-select [(ngModel)]="filtroUbicacion" placeholder="Selecciona una ubicación">
-      <ion-select-option *ngFor="let ubicacion of ubicacionesDisponibles" [value]="ubicacion">{{ ubicacion }}</ion-select-option>
+      <ion-select-option *ngFor="let ubicacion of ubicacionesDisponibles" [value]="ubicacion">{{ ubicacion
+        }}</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -51,34 +58,10 @@
   <ion-button expand="full" (click)="aplicarFiltros()">Aplicar Filtros</ion-button>
   <ion-button expand="full" color="secondary" (click)="restablecerLista()">Restablecer Lista</ion-button>
 
+  <!-- Botón para mostrar estadísticas -->
+  <ion-button expand="full" color="tertiary" (click)="mostrarEstadisticas()">Ver Estadísticas</ion-button>
   <!-- Lista de incidentes -->
   <ion-list>
-    <ion-item-sliding *ngFor="let incidente of incidentesFiltrados">
-      <ion-item>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
-          <ion-card-subtitle>Prioridad: {{ incidente.prioridad }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
-          <p><strong>Ubicación:</strong> {{ incidente.ubicacion }}</p>
-          <p><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</p>
-          <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img>
-        </ion-card-content>
-        </ion-card>
-      </ion-item>
-      <ion-item-options side="end" (click)="Completar( incidente.id )">
-        <ion-item-option color="success"><ion-icon name="checkmark-done-outline"></ion-icon></ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="start">
-        <ion-item-option color="danger" (click)="Borrar( incidente.id )"><ion-icon name="close-outline" ></ion-icon></ion-item-option>
-        </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-</ion-content>
-<!--
-Roberto:
     <ion-card *ngFor="let incidente of incidentesFiltrados">
       <ion-card-header>
         <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
@@ -91,19 +74,5 @@ Roberto:
         <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img>
       </ion-card-content>
     </ion-card>
-Eric:
-        <ion-item-sliding *ngFor="let incidente of incidentesFiltrados">
-      <ion-item>
-        <ion-label>{{ incidente.tipoIncidente }}</ion-label><br>
-        <ion-label>Prioridad: {{ incidente.prioridad }}</ion-label><br>
-        <ion-label><strong>Descripción:</strong> {{ incidente.descripcion }}</ion-label><br>
-        <ion-label><strong>Ubicación:</strong> {{ incidente.ubicacion }}</ion-label><br>
-        <ion-label><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</ion-label><br>
-        <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img><br>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option>Favorite</ion-item-option>
-        <ion-item-option color="danger">Delete</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
--->
+  </ion-list>
+</ion-content>
