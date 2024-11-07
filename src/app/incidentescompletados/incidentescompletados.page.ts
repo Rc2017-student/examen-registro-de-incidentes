@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { NotificacionesPage } from '../notificaciones/notificaciones.page';
+
 @Component({
-  selector: 'app-verincidentes',
-  templateUrl: './verincidentes.page.html',
-  styleUrls: ['./verincidentes.page.scss'],
+  selector: 'app-incidentescompletados',
+  templateUrl: './incidentescompletados.page.html',
+  styleUrls: ['./incidentescompletados.page.scss'],
 })
-export class VerincidentesPage implements OnInit {
+export class IncidentescompletadosPage implements OnInit {
   indice: number = 0;
   incidentes: {
     id: number;
@@ -44,20 +47,59 @@ export class VerincidentesPage implements OnInit {
   tiposDisponibles: string[] = [];
   ubicacionesDisponibles: string[] = [];
 
-  constructor(private router: Router) { }
+    constructor(
+      private router: Router, 
+      private alertController: AlertController, 
+      public notificacionesPage: NotificacionesPage
+    ) {  }
+  // Mostrar estadísticas de incidentes completados
+  async mostrarEstadisticas() {
+    this.notificacionesPage.incrementarContador();
+    const totalIncidentes = this.incidentes.length;
+    const completados = this.incidentesCompletados.length;
+    const porcentajeCompletados = (completados / totalIncidentes) * 100;
 
+    // Contar incidentes por categoría y área
+    const estadisticasCategoria: { [key: string]: number } = {};
+    const estadisticasArea: { [key: string]: number } = {};
+
+    this.incidentesCompletados.forEach(incidente => {
+      // Contar por categoría
+      estadisticasCategoria[incidente.tipoIncidente] = (estadisticasCategoria[incidente.tipoIncidente] || 0) + 1;
+      // Contar por área
+      estadisticasArea[incidente.ubicacion] = (estadisticasArea[incidente.ubicacion] || 0) + 1;
+    });
+
+    // Formatear los datos para mostrar en el alert
+    const mensajeEstadisticas =
+      `
+    Porcentaje de incidentes completados: ${porcentajeCompletados.toFixed(2)}%\n
+    \n\nInciendentes por Categoría:\n\n${Object.entries(estadisticasCategoria).map(([categoria, count]) => `- ${categoria}: ${count}`).join('\n')}
+    \n\nInciendentes por Área:\n\n${Object.entries(estadisticasArea).map(([area, count]) => `- ${area}: ${count}`).join('\n')}
+  `;
+
+    // Mostrar alert con estadísticas
+    const alert = await this.alertController.create({
+      header: 'Estadísticas de Incidentes',
+      message: mensajeEstadisticas,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
   ngOnInit() {
     let incidentesCompletado = localStorage.getItem('incidentesCompletados')
     if (incidentesCompletado) {
       this.incidentesCompletados = JSON.parse(incidentesCompletado);
     }
     // Cargar incidentes del localStorage
-    let incidentesGuardados = localStorage.getItem('incidentes');
+    let incidentesGuardados = localStorage.getItem('incidentesCompletados');
     if (incidentesGuardados) {
       this.incidentes = JSON.parse(incidentesGuardados);
+
       // Ordenar los incidentes por prioridad (alta, media, baja)
       this.incidentes.sort((a, b) => this.ordenarPorPrioridad(a.prioridad, b.prioridad));
-      this.incidentesFiltrados = [...this.incidentes];
+      this.incidentesFiltrados = [...this.incidentesCompletados];
 
       // Obtener listas únicas de tipos y ubicaciones para los filtros
       this.tiposDisponibles = Array.from(new Set(this.incidentes.map(inc => inc.tipoIncidente)));
@@ -71,7 +113,7 @@ export class VerincidentesPage implements OnInit {
   }
 
   aplicarFiltros() {
-    this.incidentesFiltrados = this.incidentes.filter(incidente => {
+    this.incidentesFiltrados = this.incidentesCompletados.filter(incidente => {
       return (
         (!this.filtroTipo || incidente.tipoIncidente === this.filtroTipo) &&
         (!this.filtroUbicacion || incidente.ubicacion === this.filtroUbicacion) &&
@@ -87,7 +129,7 @@ export class VerincidentesPage implements OnInit {
     this.filtroPrioridad = '';
 
     // Restaurar la lista original de incidentes
-    this.incidentesFiltrados = [...this.incidentes];
+    this.incidentesFiltrados = [...this.incidentesCompletados];
   }
   navigateTo(page: string) {
     this.router.navigate([`/${page}`]);
@@ -104,14 +146,6 @@ export class VerincidentesPage implements OnInit {
     localStorage.setItem('incidentesCompletados', JSON.stringify(this.incidentesCompletados));
     this.incidentesFiltrados.splice(this.indice, 1);
     localStorage.setItem('incidentes', JSON.stringify(this.incidentesFiltrados));
-    
-    // Agregar notificación
-    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
-    notificaciones.push({
-      mensaje: `Incidente completado: ${incidente.tipoIncidente}`,
-      fecha: new Date().toLocaleString()
-    });
-    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
   }
   Borrar(id: number) {
     console.log("hosafsdfsd");

@@ -22,7 +22,19 @@ const routes: Routes = [
   {
     path: 'verincidentes',
     loadChildren: () => import('./verincidentes/verincidentes.module').then( m => m.VerincidentesPageModule)
+  },  {
+    path: 'incidentescompletados',
+    loadChildren: () => import('./incidentescompletados/incidentescompletados.module').then( m => m.IncidentescompletadosPageModule)
   },
+  {
+    path: 'notificaciones',
+    loadChildren: () => import('./notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ export class AddincidentesPage {
   prioridad: string = '';
 
   incidentes: {
+    id: number;
     tipoIncidente: string,
     descripcion: string,
     ubicacion: string,
@@ -60,6 +61,7 @@ export class AddincidentesPage {
 
     // Agregar el nuevo incidente a la lista
     this.incidentes.push({
+      id: Date.now(),
       tipoIncidente: this.tipoIncidente,
       descripcion: this.descripcion,
       ubicacion: this.ubicacion,
@@ -67,7 +69,15 @@ export class AddincidentesPage {
       fotoUrl: this.fotoUrl,
       prioridad: this.prioridad
     });
+    // Notificar adición de nuevo incidente
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Nuevo incidente agregado: ${this.tipoIncidente}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
 
+    alert('Incidente guardado exitosamente');
     // Limpiar los campos del formulario
     this.tipoIncidente = '';
     this.descripcion = '';
@@ -84,4 +94,5 @@ export class AddincidentesPage {
   navigateTo(page: string) {
     this.router.navigate([`/${page}`]);
   }
+
 }
