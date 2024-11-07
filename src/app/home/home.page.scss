@@ -1,27 +1,56 @@
+/* Fondo gris oscuro para todo el contenido */
+.content-wrapper {
+  background-color: #1c1c1c; /* Fondo gris oscuro */
+  height: 100vh;
+}
+
+/* Contenedor externo para centrar en el medio de la pantalla */
+.outer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Contenedor del formulario */
 #container {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #2e2e2e; /* Gris ligeramente más claro que el fondo */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
+/* Título y etiquetas */
 #container strong {
-  font-size: 20px;
-  line-height: 26px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 15px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+/* Estilos para ion-item */
+ion-item {
+  --border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --background: #424242; /* Fondo de campo de texto */
+  --color: #ffffff; /* Texto en blanco */
 }
 
-#container a {
-  text-decoration: none;
+/* Botones */
+ion-button {
+  margin-top: 10px;
+  width: 100%;
+  --border-radius: 8px;
 }
+
+ion-button[color="light"] {
+  --background: #f0f0f0;
+  --color: #007bff;
+}
+

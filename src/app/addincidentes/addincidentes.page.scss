@@ -1,0 +1,54 @@
+/* Fondo gris oscuro */
+.content-wrapper {
+    background-color: #1c1c1c; /* Fondo gris oscuro */
+    height: 100vh;
+    padding-top: 20px; /* Ajuste para separar del encabezado */
+  }
+  
+  /* Contenedor externo para centrar en el medio de la pantalla */
+  .outer-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alineación en la parte superior para evitar conflicto con el encabezado */
+    height: 100%;
+  }
+  
+  /* Estilo del formulario */
+  #container {
+    width: 95%;
+    max-width: 500px;
+    padding: 25px;
+    margin-top: 20px; /* Espacio adicional en la parte superior */
+    background-color: #2e2e2e;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  /* Título y etiquetas */
+  #container strong {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos de ion-item */
+  ion-item {
+    --border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --background: #424242;
+    --color: #ffffff;
+  }
+  
+  /* Estilo del ion-datetime para que aparezca al hacer clic */
+  ion-datetime {
+    display: block;
+    width: 100%;
+    --background: #424242;
+    --color: #ffffff;
+  }
+  

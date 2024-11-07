@@ -19,48 +19,56 @@
       Menú Principal
     </ion-segment-button>
   </ion-segment>
+  
+  <!-- Contenedor principal que divide la página en dos columnas -->
+  <div class="container">
+    <!-- Contenedor de Filtros -->
+    <div class="filter-container">
+      <ion-item>
+        <ion-label position="stacked">Filtrar por Tipo:</ion-label>
+        <ion-select [(ngModel)]="filtroTipo" placeholder="Selecciona un tipo">
+          <ion-select-option *ngFor="let tipo of tiposDisponibles" [value]="tipo">{{ tipo }}</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <!-- Filtros -->
-  <ion-item>
-    <ion-label position="stacked">Filtrar por Tipo:</ion-label>
-    <ion-select [(ngModel)]="filtroTipo" placeholder="Selecciona un tipo">
-      <ion-select-option *ngFor="let tipo of tiposDisponibles" [value]="tipo">{{ tipo }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Filtrar por Ubicación:</ion-label>
+        <ion-select [(ngModel)]="filtroUbicacion" placeholder="Selecciona una ubicación">
+          <ion-select-option *ngFor="let ubicacion of ubicacionesDisponibles" [value]="ubicacion">{{ ubicacion }}</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Filtrar por Ubicación:</ion-label>
-    <ion-select [(ngModel)]="filtroUbicacion" placeholder="Selecciona una ubicación">
-      <ion-select-option *ngFor="let ubicacion of ubicacionesDisponibles" [value]="ubicacion">{{ ubicacion }}</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Filtrar por Prioridad:</ion-label>
+        <ion-select [(ngModel)]="filtroPrioridad" placeholder="Selecciona una prioridad">
+          <ion-select-option value="alta">Alta</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="baja">Baja</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Filtrar por Prioridad:</ion-label>
-    <ion-select [(ngModel)]="filtroPrioridad" placeholder="Selecciona una prioridad">
-      <ion-select-option value="alta">Alta</ion-select-option>
-      <ion-select-option value="media">Media</ion-select-option>
-      <ion-select-option value="baja">Baja</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-button expand="full" (click)="aplicarFiltros()">Aplicar Filtros</ion-button>
+      <ion-button expand="full" color="secondary" (click)="restablecerLista()">Restablecer Lista</ion-button>
+    </div>
 
-  <!-- Botones para aplicar filtros y restablecer lista -->
-  <ion-button expand="full" (click)="aplicarFiltros()">Aplicar Filtros</ion-button>
-  <ion-button expand="full" color="secondary" (click)="restablecerLista()">Restablecer Lista</ion-button>
-
-  <!-- Lista de incidentes -->
-  <ion-list>
-    <ion-card *ngFor="let incidente of incidentesFiltrados">
-      <ion-card-header>
-        <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
-        <ion-card-subtitle>Prioridad: {{ incidente.prioridad }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
-        <p><strong>Ubicación:</strong> {{ incidente.ubicacion }}</p>
-        <p><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</p>
-        <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+    <!-- Contenedor de la Lista de Incidentes -->
+    <div class="incident-list">
+      <ion-list>
+        <ion-card *ngFor="let incidente of incidentesFiltrados" class="incident-card">
+          <div class="incident-info">
+            <ion-card-header>
+              <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
+              <ion-card-subtitle>Prioridad: {{ incidente.prioridad }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
+              <p><strong>Ubicación:</strong> {{ incidente.ubicacion }}</p>
+              <p><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</p>
+            </ion-card-content>
+          </div>
+          <ion-img [src]="incidente.fotoUrl" class="incident-image" alt="Foto del incidente"></ion-img>
+        </ion-card>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>

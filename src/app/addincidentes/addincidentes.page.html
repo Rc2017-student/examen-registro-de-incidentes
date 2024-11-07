@@ -1,17 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Registrar Incidente</ion-title>
+    <ion-title>{{ pageTitle }}</ion-title>
   </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Registrar Incidente</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-segment value="menuprincipal">
+  <!-- Menú de navegación para cambiar entre páginas -->
+  <ion-segment value="addincidentes">
     <ion-segment-button (click)="navigateTo('menuprincipal')" value="menuprincipal">
       Menú Principal
     </ion-segment-button>
@@ -19,54 +12,67 @@
       Ver Incidentes
     </ion-segment-button>
   </ion-segment>
-  
-  <!-- Formulario para registrar el incidente -->
-  <ion-item>
-    <ion-label position="stacked">Tipo de Incidente:</ion-label>
-    <ion-select [(ngModel)]="tipoIncidente">
-      <ion-select-option value="equipo dañado">Equipo Dañado</ion-select-option>
-      <ion-select-option value="objeto perdido">Objeto Perdido</ion-select-option>
-      <ion-select-option value="olvido de apagar luces/aires">Olvido de Apagar Luces/Aires</ion-select-option>
-      <ion-select-option value="morros con calentura">Morros con Calentura</ion-select-option>
-    </ion-select>
-  </ion-item>
+</ion-header>
 
-  <ion-item>
-    <ion-label position="stacked">Descripción:</ion-label>
-    <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
-  </ion-item>
+<ion-content [fullscreen]="true" class="ion-padding content-wrapper">
+  <div class="outer-wrapper">
+    <div id="container">
+      <strong>Registrar Incidente</strong>
 
-  <ion-item>
-    <ion-label position="stacked">Ubicación:</ion-label>
-    <ion-select [(ngModel)]="ubicacion">
-      <ion-select-option value="aula">Aula</ion-select-option>
-      <ion-select-option value="cubículo">Cubículo</ion-select-option>
-      <ion-select-option value="laboratorio">Laboratorio</ion-select-option>
-      <ion-select-option value="auditorio">Auditorio</ion-select-option>
-      <ion-select-option value="dirección">Dirección</ion-select-option>
-      <ion-select-option value="baño">Baño</ion-select-option>
-      <ion-select-option value="explanada">Explanada</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Tipo de Incidente:</ion-label>
+        <ion-select [(ngModel)]="tipoIncidente">
+          <ion-select-option value="equipo dañado">Equipo Dañado</ion-select-option>
+          <ion-select-option value="objeto perdido">Objeto Perdido</ion-select-option>
+          <ion-select-option value="olvido de apagar luces/aires">Olvido de Apagar Luces/Aires</ion-select-option>
+          <ion-select-option value="morros con calentura">Morros con Calentura</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Fecha y Hora:</ion-label>
-    <ion-datetime display-format="MM/DD/YYYY HH:mm" [(ngModel)]="fechaHora"></ion-datetime>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descripción:</ion-label>
+        <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Foto URL:</ion-label>
-    <ion-input type="text" [(ngModel)]="fotoUrl"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ubicación:</ion-label>
+        <ion-select [(ngModel)]="ubicacion">
+          <ion-select-option value="Aula">Aula</ion-select-option>
+          <ion-select-option value="Cubículo">Cubículo</ion-select-option>
+          <ion-select-option value="Laboratorio">Laboratorio</ion-select-option>
+          <ion-select-option value="Auditorio">Auditorio</ion-select-option>
+          <ion-select-option value="Dirección">Dirección</ion-select-option>
+          <ion-select-option value="Baño">Baño</ion-select-option>
+          <ion-select-option value="Explanada">Explanada</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Prioridad:</ion-label>
-    <ion-select [(ngModel)]="prioridad">
-      <ion-select-option value="baja">Baja</ion-select-option>
-      <ion-select-option value="media">Media</ion-select-option>
-      <ion-select-option value="alta">Alta</ion-select-option>
-    </ion-select>
-  </ion-item>
+      <!-- Campo de fecha y hora como input -->
+      <ion-item>
+        <ion-label position="stacked">Fecha y Hora:</ion-label>
+        <ion-input
+          readonly
+          placeholder="Selecciona Fecha y Hora"
+          [value]="fechaHora"
+          (click)="openDatePicker()">
+        </ion-input>
+      </ion-item>
 
-  <ion-button expand="full" (click)="guardarIncidente()">Guardar Incidente</ion-button>
+      <ion-item>
+        <ion-label position="stacked">Foto URL:</ion-label>
+        <ion-input type="text" [(ngModel)]="fotoUrl"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Prioridad:</ion-label>
+        <ion-select [(ngModel)]="prioridad">
+          <ion-select-option value="Baja">Baja</ion-select-option>
+          <ion-select-option value="Media">Media</ion-select-option>
+          <ion-select-option value="Alta">Alta</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" (click)="guardarIncidente()">Guardar Incidente</ion-button>
+    </div>
+  </div>
 </ion-content>
