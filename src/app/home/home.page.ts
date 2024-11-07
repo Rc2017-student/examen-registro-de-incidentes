@@ -87,7 +87,6 @@ export class HomePage {
 
   // Alterna entre el modo de registro e inicio de sesión
   toggleRegisterMode() { 
-    
     this.isRegisterMode = !this.isRegisterMode;
   }
 }
