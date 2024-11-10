@@ -1,0 +1,44 @@
+/* Estilo general del contenedor */
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2e2e2e; /* Fondo gris oscuro */
+  padding-bottom: 20px;
+}
+
+/* Contenedor centrado */
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 550px; /* Aumenta el tamaño máximo del contenedor */
+  margin: 0 auto;
+}
+
+/* Estilo de cada tarjeta de notificación */
+.notification-card {
+  width: 100%; /* Tarjeta ocupa todo el ancho del contenedor */
+  max-width: 550px; /* Alinea con el tamaño del contenedor */
+  margin-bottom: 5px;
+  background-color: #424242; /* Color gris oscuro */
+  color: #ffffff; /* Texto blanco */
+  border-radius: 10px;
+  padding: 5px; /* Espacio interno para que el contenido tenga más margen */
+}
+
+/* Título de la tarjeta */
+.notification-card ion-card-title {
+  font-size: 1.2em;
+  color: #3880ff; /* Color de acento */
+}
+
+/* Botón para limpiar notificaciones */
+.clear-button {
+  width: 100%; /* Botón ocupa todo el ancho del contenedor */
+  max-width: 550px; /* Alinea con el tamaño del contenedor */
+  margin-top: 10px;
+  background-color: #eb445a; /* Rojo de peligro */
+  color: #ffffff;
+}

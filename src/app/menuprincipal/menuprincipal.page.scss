@@ -1,0 +1,21 @@
+.navigation-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 10px; /* Añade un poco de espacio alrededor del menú */
+}
+
+ion-segment {
+  width: 100%;
+  max-width: 500px; /* Limita el ancho en pantallas más grandes */
+}
+
+ion-segment-button {
+  --color-checked: #3880ff; /* Cambia el color cuando está seleccionado */
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+}
+
+ion-segment-button::part(native) {
+  margin: 0 5px; /* Espacio entre los botones */
+}

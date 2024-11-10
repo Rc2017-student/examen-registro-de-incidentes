@@ -11,6 +11,7 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Menú de navegación centrado -->
   <ion-segment>
     <ion-segment-button (click)="navigateTo('addincidentes')" value="addincidentes">
       Añadir Incidente
@@ -18,14 +19,14 @@
     <ion-segment-button (click)="navigateTo('menuprincipal')" value="menuprincipal">
       Menú Principal
     </ion-segment-button>
-    <ion-segment-button (click)="navigateTo('incidentescompletados')" value="incidentesompletados">
-      Incidentes completados
+    <ion-segment-button (click)="navigateTo('incidentescompletados')" value="incidentescompletados">
+      Incidentes Completados
     </ion-segment-button>
   </ion-segment>
   
   <!-- Contenedor principal que divide la página en dos columnas -->
   <div class="container">
-    <!-- Contenedor de Filtros -->
+    <!-- Contenedor de Filtros Fijo a la Izquierda -->
     <div class="filter-container">
       <ion-item>
         <ion-label position="stacked">Filtrar por Tipo:</ion-label>
@@ -54,59 +55,40 @@
       <ion-button expand="full" color="secondary" (click)="restablecerLista()">Restablecer Lista</ion-button>
     </div>
 
-  <!-- Lista de incidentes -->
-  <ion-list>
-    <ion-item-sliding *ngFor="let incidente of incidentesFiltrados">
-      <ion-item>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
-          <ion-card-subtitle>Prioridad: {{ incidente.prioridad }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
-          <p><strong>Ubicación:</strong> {{ incidente.ubicacion }}</p>
-          <p><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</p>
-          <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img>
-        </ion-card-content>
-        </ion-card>
-      </ion-item>
-      <ion-item-options side="end" (click)="Completar( incidente.id )">
-        <ion-item-option color="success"><ion-icon name="checkmark-done-outline"></ion-icon></ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="start">
-        <ion-item-option color="danger" (click)="Borrar( incidente.id )"><ion-icon name="close-outline" ></ion-icon></ion-item-option>
-        </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-</ion-content>
-<!--
-Roberto:
-    <ion-card *ngFor="let incidente of incidentesFiltrados">
-      <ion-card-header>
-        <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
-        <ion-card-subtitle>Prioridad: {{ incidente.prioridad }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
-        <p><strong>Ubicación:</strong> {{ incidente.ubicacion }}</p>
-        <p><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</p>
-        <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img>
-      </ion-card-content>
-    </ion-card>
-Eric:
+    <!-- Lista de Incidentes a la Derecha -->
+    <div class="incident-list">
+      <ion-list>
         <ion-item-sliding *ngFor="let incidente of incidentesFiltrados">
-      <ion-item>
-        <ion-label>{{ incidente.tipoIncidente }}</ion-label><br>
-        <ion-label>Prioridad: {{ incidente.prioridad }}</ion-label><br>
-        <ion-label><strong>Descripción:</strong> {{ incidente.descripcion }}</ion-label><br>
-        <ion-label><strong>Ubicación:</strong> {{ incidente.ubicacion }}</ion-label><br>
-        <ion-label><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</ion-label><br>
-        <ion-img [src]="incidente.fotoUrl" alt="Foto del incidente"></ion-img><br>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option>Favorite</ion-item-option>
-        <ion-item-option color="danger">Delete</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
--->
+          <ion-item>
+            <ion-card class="incident-card">
+              <div class="incident-info">
+                <ion-card-header>
+                  <ion-card-title>{{ incidente.tipoIncidente }}</ion-card-title>
+                  <ion-card-subtitle>Prioridad: {{ incidente.prioridad }}</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+                  <p><strong>Descripción:</strong> {{ incidente.descripcion }}</p>
+                  <p><strong>Ubicación:</strong> {{ incidente.ubicacion }}</p>
+                  <p><strong>Fecha y Hora:</strong> {{ incidente.fechaHora }}</p>
+                </ion-card-content>
+              </div>
+              <ion-img [src]="incidente.fotoUrl" class="incident-image" alt="Foto del incidente"></ion-img>
+            </ion-card>
+          </ion-item>
+          
+          <ion-item-options side="end">
+            <ion-item-option color="success" (click)="Completar(incidente.id)">
+              <ion-icon name="checkmark-done-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+          
+          <ion-item-options side="start">
+            <ion-item-option color="danger" (click)="Borrar(incidente.id)">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

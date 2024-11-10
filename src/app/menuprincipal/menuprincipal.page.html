@@ -4,17 +4,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button (click)="navigateTo('addincidentes')" value="addincidentes">
-    Añadir Incidente
-  </ion-button>
-  <ion-button (click)="navigateTo('verincidentes')" value="verincidentes">
-    Ver Incidentes
-  </ion-button>
-  <ion-button (click)="navigateTo('notificaciones')" value="notificaciones">
-    Notificaciones
-  </ion-button>
-  <ion-button (click)="navigateTo('perfil')" value="perfil">
-    Perfil
-  </ion-button>
+<ion-content [fullscreen]="true">
+  <!-- Barra de navegación con ion-segment centrado -->
+  <div class="navigation-container">
+    <ion-segment mode="ios">
+      <ion-segment-button (click)="navigateTo('addincidentes')" value="addincidentes">
+        Añadir Incidente
+      </ion-segment-button>
+      <ion-segment-button (click)="navigateTo('verincidentes')" value="verincidentes">
+        Ver Incidentes
+      </ion-segment-button>
+      <ion-segment-button (click)="navigateTo('notificaciones')" value="notificaciones">
+        Notificaciones
+      </ion-segment-button>
+      <ion-segment-button (click)="navigateTo('perfil')" value="perfil">
+        Perfil
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 </ion-content>

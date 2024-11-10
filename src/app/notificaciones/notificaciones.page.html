@@ -1,22 +1,33 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Notificaciones</ion-title>
   </ion-toolbar>
-  <ion-segment value="addincidentes">
-    <ion-segment-button (click)="navigateTo('menuprincipal')" value="addincidentes">
+
+  <!-- Botón de navegación para regresar al menú principal -->
+  <ion-segment>
+    <ion-segment-button (click)="navigateTo('menuprincipal')" value="menuprincipal">
       Volver
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let notificacion of notificaciones">
-      <ion-label>
+<ion-content [fullscreen]="true" class="ion-padding content-wrapper">
+  <!-- Contenedor para centrar la lista y el botón -->
+  <div class="centered-content">
+    <!-- Tarjetas de notificación -->
+    <ion-card *ngFor="let notificacion of notificaciones" class="notification-card">
+      <ion-card-header>
+        <ion-card-title>Notificación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
         <h2>{{ notificacion.mensaje }}</h2>
         <p>{{ notificacion.fecha }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="full" color="danger" (click)="limpiarNotificaciones()">Limpiar Notificaciones</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botón para limpiar todas las notificaciones -->
+    <ion-button expand="full" color="danger" (click)="limpiarNotificaciones()" class="clear-button">
+      Limpiar Notificaciones
+    </ion-button>
+  </div>
 </ion-content>
