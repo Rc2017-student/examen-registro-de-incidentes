@@ -14,16 +14,22 @@ export class PerfilPage {
   confirmNewPassword: string = '';
   verDatos: boolean = false;
 
-  constructor(private router: Router) {
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
+    this.cargarDatosUsuario();
+  }
+
+  // Función para cargar los datos del usuario desde el localStorage
+  cargarDatosUsuario() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
-    this.firstName = currentUser.firstName || '';
-    this.lastName = currentUser.lastName || '';
-    this.username = currentUser.username || '';
+    // Solo cargar si los datos existen
+    if (currentUser && currentUser.username) {
+      this.firstName = currentUser.firstName || '';
+      this.lastName = currentUser.lastName || '';
+      this.username = currentUser.username || '';
+    }
   }
 
   saveProfile() {
@@ -48,7 +54,7 @@ export class PerfilPage {
     // Actualizar la información del usuario en el almacenamiento local
     const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     const userIndex = registeredUsers.findIndex((user: any) => user.username === updatedUser.username);
-    
+
     if (userIndex !== -1) {
       registeredUsers[userIndex] = updatedUser;
     } else {
@@ -57,15 +63,24 @@ export class PerfilPage {
 
     localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
     localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+
     alert('¡Perfil actualizado con éxito!');
-    this.router.navigate(['/menuprincipal']);
+    this.cargarDatosUsuario(); // Recargar los datos actualizados
+    this.toggleRegisterMode(); // Volver al modo de visualización
   }
-    // Función para manejar la navegación
-    navigateTo(page: string) {
-      this.router.navigate([`/${page}`]);
-    }
-      // Alterna entre el modo de registro e inicio de sesión
+
+  // Función para manejar la navegación
+  navigateTo(page: string) {
+    this.router.navigate([`/${page}`]);
+  }
+
+  // Alterna entre el modo de visualización y edición
   toggleRegisterMode() {
     this.verDatos = !this.verDatos;
+
+    // Si se vuelve al modo de visualización, recargar los datos
+    if (!this.verDatos) {
+      this.cargarDatosUsuario();
+    }
   }
 }

@@ -9,62 +9,72 @@
   </ion-segment>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-<!--Panel para ver tus datos -->
-<div *ngIf="!verDatos">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Datos del Perfil</ion-card-title>
-    </ion-card-header>
+<ion-content [fullscreen]="true" class="ion-padding content-wrapper">
+  <div class="outer-wrapper">
+    <!-- Panel para ver tus datos -->
+    <div *ngIf="!verDatos" class="center-container">
+      <ion-card class="profile-card">
+        <ion-card-header>
+          <ion-card-title>Datos del Perfil</ion-card-title>
+        </ion-card-header>
 
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-label position="stacked" color="medium">Nombre de Usuario</ion-label>
-        <ion-text color="dark">{{ username }}</ion-text>
-      </ion-item>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-label position="stacked" color="medium">Nombre de Usuario</ion-label>
+            <ion-text color="white">{{ username }}</ion-text>
+          </ion-item>
 
-      <ion-item lines="none">
-        <ion-label position="stacked" color="medium">Nombre</ion-label>
-        <ion-text color="dark">{{ firstName }}</ion-text>
-      </ion-item>
+          <ion-item lines="none">
+            <ion-label position="stacked" color="medium">Nombre</ion-label>
+            <ion-text color="white">{{ firstName }}</ion-text>
+          </ion-item>
 
-      <ion-item lines="none">
-        <ion-label position="stacked" color="medium">Apellidos</ion-label>
-        <ion-text color="dark">{{ lastName }}</ion-text>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-  <ion-button expand="full" color="light" (click)="toggleRegisterMode()">Cambiar usuario y contraseña</ion-button>
-</div>
+          <ion-item lines="none">
+            <ion-label position="stacked" color="medium">Apellidos</ion-label>
+            <ion-text color="white">{{ lastName }}</ion-text>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-button expand="block" color="tertiary" (click)="toggleRegisterMode()" class="button-aligned">
+        Cambiar usuario y contraseña
+      </ion-button>
+    </div>
 
-<!-- Formulario de cambio de datos -->
-<div *ngIf="verDatos">
-  <ion-item>
-    <ion-label position="stacked">Nombre</ion-label>
-    <ion-input [(ngModel)]="firstName" type="text" placeholder="Ingresa tu nombre"></ion-input>
-  </ion-item>
+    <!-- Formulario de cambio de datos -->
+    <div *ngIf="verDatos" class="center-container">
+      <div class="form-container">
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input [(ngModel)]="firstName" type="text" placeholder="Ingresa tu nombre"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Apellidos</ion-label>
-    <ion-input [(ngModel)]="lastName" type="text" placeholder="Ingresa tus apellidos"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Apellidos</ion-label>
+          <ion-input [(ngModel)]="lastName" type="text" placeholder="Ingresa tus apellidos"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Nombre de Usuario</ion-label>
-    <ion-input [(ngModel)]="username" type="text" placeholder="Ingresa tu nombre de usuario"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nombre de Usuario</ion-label>
+          <ion-input [(ngModel)]="username" type="text" placeholder="Ingresa tu nombre de usuario"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Nueva Contraseña</ion-label>
-    <ion-input [(ngModel)]="newPassword" type="password" placeholder="Ingresa tu nueva contraseña"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nueva Contraseña</ion-label>
+          <ion-input [(ngModel)]="newPassword" type="password" placeholder="Ingresa tu nueva contraseña"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Confirmar Nueva Contraseña</ion-label>
-    <ion-input [(ngModel)]="confirmNewPassword" type="password" placeholder="Confirma tu nueva contraseña"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Confirmar Nueva Contraseña</ion-label>
+          <ion-input [(ngModel)]="confirmNewPassword" type="password" placeholder="Confirma tu nueva contraseña"></ion-input>
+        </ion-item>
 
-  <ion-button expand="full" (click)="saveProfile()">Guardar Cambios</ion-button>
-  <ion-button expand="full" color="light" (click)="toggleRegisterMode()">Cancelar</ion-button>
-</div>
+        <ion-button expand="block" color="success" (click)="saveProfile()" class="button-aligned">
+          Guardar Cambios
+        </ion-button>
+        <ion-button expand="block" color="light" (click)="toggleRegisterMode()" class="button-aligned">
+          Cancelar
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>
