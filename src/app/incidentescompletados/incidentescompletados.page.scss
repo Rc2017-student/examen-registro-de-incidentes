@@ -1,0 +1,58 @@
+/* Contenedor principal para dividir la página */
+.container {
+    display: flex;
+    height: 100%;
+  }
+  
+  /* Contenedor de filtros a la izquierda, con fondo gris oscuro y tamaño fijo */
+  .filter-container {
+    width: 25%;
+    padding: 10px;
+    background-color: #2e2e2e; /* Fondo gris oscuro */
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-right: 1px solid #444;
+    position: fixed; /* Hace el contenedor de filtros estático en su posición */
+    top: 115px; /* Ajuste para que no sobrepase el encabezado */
+    padding-top: 22px;
+    bottom: 0;
+    overflow-y: auto; /* Permite desplazarse dentro del contenedor si hay demasiados filtros */
+  }
+  
+  /* Contenedor de la lista de incidentes, desplazado hacia la derecha de los filtros */
+  .incident-list {
+    width: 75%;
+    padding: 10px;
+    overflow-y: auto;
+    margin-left: 25%; /* Desplaza el contenido para que no se solape con el filtro fijo */
+  }
+  
+  /* Estilo de cada tarjeta de incidente */
+  .incident-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #424242;
+    border-radius: 8px;
+    padding: 10px;
+    width: calc(100% - 20px); /* Asegura que ocupe todo el ancho disponible */
+  }
+  
+  /* Información del incidente alineada a la izquierda */
+  .incident-info {
+    flex: 1;
+    padding-right: 10px;
+    color: #ffffff; /* Texto blanco para contraste */
+  }
+  
+  /* Imagen del incidente alineada a la derecha */
+  .incident-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-left: 10px; /* Da un pequeño espacio entre la información y la imagen */
+  }
+  
